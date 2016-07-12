@@ -49,7 +49,7 @@ Tetris.prototype.init = function () {
     requestAnimationFrame(innerLoopFunc);
 
     for(var row = 0; row < this.rows; row++) {
-        this.board.push(Array.apply(null, Array(this.cols)).map(Number.prototype.valueOf,0));
+        this.board.push(Array.apply(null, Array(this.cols)).map(Number.prototype.valueOf, 0));
     }
 };
 
@@ -66,7 +66,6 @@ Tetris.prototype.loop = function() {
     var now = Date.now();
     if (now - this.prevTick > this.tickSize) {
         if (this.blockStopsNextTick) {
-            console.log(1);
             this.addBlockToBoard();
             this.dropNewBlock();
             this.removeCompleteRow();
@@ -174,7 +173,7 @@ Tetris.prototype._addKeyContol = function () {
         switch(e.keyCode) {
             case 37: // left
                 e.preventDefault();
-                game.moveBlock(0, -1, true);
+                game.moveBlock(0, -1);
                 break;
             case 38: // up
                 e.preventDefault();
@@ -182,11 +181,11 @@ Tetris.prototype._addKeyContol = function () {
                 break;
             case 39: // right
                 e.preventDefault();
-                game.moveBlock(0, 1, true);
+                game.moveBlock(0, 1);
                 break;
             case 40: // down
                 e.preventDefault();
-                game.moveBlock(1, 0, true);
+                game.moveBlock(1, 0);
                 break;
             default: break;
         }

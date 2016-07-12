@@ -107,7 +107,7 @@ Tetris.prototype.isMovable = function (offset) {
 
     for (row = 0; row < block.rows; row++) {
         for (col = 0; col < block.cols; col++) {
-            isOutOfBoundary = !this.blockIsWithinBoundary(0, 0, this.rows, this.cols);
+            isOutOfBoundary = !this.blockIsWithinBoundary(offset);
             isOverlap = !isOutOfBoundary &&
                           block.shape[row][col] > 0 &&
                           this.board[newBlockPosition.row+ row][newBlockPosition.col + col] > 0;
@@ -239,9 +239,14 @@ Tetris.prototype.rotateBlock = function() {
     this.block.cols = oldRows;
 };
 
-Tetris.prototype.blockIsWithinBoundary = function (row, col, rows, cols) {
-    return this.block.position.row >= row &&
-            this.block.position.col >= col &&
-            this.block.position.row + this.block.rows < row + rows &&
-            this.block.position.col + this.block.cols < col + cols;
+Tetris.prototype.blockIsWithinBoundary = function (offset) {
+    var tempPosition = {
+        row: this.block.position.row + offset.row,
+        col: this.block.position.col + offset.col
+    };
+
+    return tempPosition.row >= 0 &&
+            tempPosition.col >= 0 &&
+            tempPosition.row + this.block.rows <= this.rows &&
+            tempPosition.col + this.block.cols <= this.cols;
 };

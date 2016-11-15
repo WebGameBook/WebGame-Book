@@ -1,0 +1,38 @@
+{
+  "name": "webgamebook_chapter6",
+  "version": "1.0.0",
+  "description": "demo for webgame book's chapter 6",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebGameBook/WebGame-Book.git"
+  },
+  "keywords": [
+    "webgamebook",
+    "slidepuzzle"
+  ],
+  "author": "CheolMinBae",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebGameBook/WebGame-Book/issues"
+  },
+  "homepage": "https://github.com/WebGameBook/WebGame-Book#readme",
+  "dependencies": {
+    "babel-core": "^5.8.25",
+    "babel-preset-es2015": "^6.18.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-contrib-copy": "^0.1.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-util": "^3.0.7",
+    "gulp-webserver": "^0.9.1",
+    "jquery": "^3.1.1",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
+  }
+}

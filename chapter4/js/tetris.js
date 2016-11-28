@@ -1,8 +1,7 @@
 import Animation from './animation';
 import ImageLoader from './image_loader';
 
-
-var rAF = (function () {
+const requestAnimationFrame = (function () {
     return window.requestAnimationFrame       ||
         window.webkitRequestAnimationFrame ||
         window.mozRequestAnimationFrame    ||
@@ -11,21 +10,21 @@ var rAF = (function () {
         };
 })();
 
-var cAF = (function () {
+const cancelAnimationFrame = (function () {
     return window.cancelAnimationFrame     ||
         window.webkitCancelAnimationFrame ||
         window.mozCancelAnimationFrame    ||
         clearTimeout;
 })();
 
-var randomProperty = function (obj) {
-    var keys = Object.keys(obj),
+const randomProperty = function (obj) {
+    let keys = Object.keys(obj),
         randomKeyIndex = Math.floor(keys.length * Math.random());
     return obj[keys[randomKeyIndex]];
 };
 
-var randomPropertyName = function (obj) {
-    var keys = Object.keys(obj),
+const randomPropertyName = function (obj) {
+    let keys = Object.keys(obj),
         randomKeyIndex = Math.floor(keys.length * Math.random());
     return keys[randomKeyIndex];
 };
@@ -114,14 +113,14 @@ export default class Tetris {
             let rowsArray = Array(this.rows).fill();
             this.board = rowsArray.map(() => Array(this.cols).fill(0));
 
-            this.requestId = rAF(this.loop.bind(this));
+            this.requestId = requestAnimationFrame(this.loop.bind(this));
         });
 
         this.addControlButtons();
     }
 
     resizeCanvas() {
-        var ratio = this.cols / (this.rows + 2),
+        let ratio = this.cols / (this.rows + 2),
             windowWidth = window.innerWidth,
             windowHeight = window.innerHeight,
             windowRatio = windowWidth / windowHeight,
@@ -160,13 +159,13 @@ export default class Tetris {
 
         if (!this.isMovable({row: 1, col: 0})) {
             alert("game over");
-            cAF(this.requestId);
+            cancelAnimationFrame(this.requestId);
             this.gameStatus = "gameover";
         }
     }
 
     loop() {
-        var now = Date.now();
+        let now = Date.now();
         if (now - this.prevTick > this.tickSize) {
             if (this.blockStopsNextTick && !this.isMovable({row: 1, col: 0})) {
                 this.addBlockToBoard();
@@ -194,7 +193,7 @@ export default class Tetris {
         if (this.gameStatus === "gameover") {
             return;
         }
-        this.requestId = rAF(this.loop.bind(this));
+        this.requestId = requestAnimationFrame(this.loop.bind(this));
     };
 
     addBlockToBoard() {
@@ -208,7 +207,7 @@ export default class Tetris {
     }
 
     isMovable(offset) {
-        var block = this.block,
+        let block = this.block,
             newBlockPosition = {
                 row: block.position.row + offset.row,
                 col: block.position.col + offset.col
@@ -268,7 +267,7 @@ export default class Tetris {
     }
 
     render() {
-        var color,
+        let color,
             blockSize = this.blockSize;
             // row, col;
 
@@ -276,8 +275,8 @@ export default class Tetris {
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         // 쌓인 블록을 그림
-        for (var [row, rowArray] of this.board.entries()) {
-            for(let [col, cell] of rowArray.entries()) {
+        for (let [row, rowArray] of this.board.entries()) {
+            for (let [col, cell] of rowArray.entries()) {
                 if (cell > 0) {
                     let image = this.blockImages[cell-1];
                     this.context.drawImage(image, col * blockSize.w, row * blockSize.h, blockSize.w, blockSize.h);
@@ -391,7 +390,7 @@ export default class Tetris {
     }
 
     addControlButtons () {
-        var buttonSizes = this.buttonSize,
+        let buttonSizes = this.buttonSize,
             leftButton  = new Button({
                 x: 0,
                 y: this.blockSize.h * 20,
@@ -447,7 +446,7 @@ export default class Tetris {
 
 class Button {
     constructor (props) {
-        this._callback = function () {};
+        this._callback = () => {};
         this.x = props.x || 0;
         this.y = props.y || 0;
         this.width = props.width || 0;
@@ -462,7 +461,7 @@ class Button {
 
     init () {
         this.canvas.addEventListener( "touchend", ( e ) => {
-            var touchX = e.changedTouches[0].clientX,
+            const touchX = e.changedTouches[0].clientX,
                 touchY = e.changedTouches[0].clientY; 
 
             if (touchX > this.x && touchX < this.x + this.width &&
@@ -470,7 +469,7 @@ class Button {
                 this._callback();
             }
         });
-        var loader = new ImageLoader(this.imageUrl);        
+        const loader = new ImageLoader(this.imageUrl);        
         loader.done(() => {
             this.image = new Image();
             this.image.src = this.imageUrl;
@@ -489,9 +488,7 @@ class Button {
     }
 
     off () {
-        this._callback = function () {
-
-        }
+        this._callback = () => {};
     }
 
 }

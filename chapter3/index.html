@@ -1,0 +1,285 @@
+<!doctype html>
+<html>
+<head>
+<title> 3. 캔버스로 그리기</title>
+</head>
+<body>
+    <canvas id="webgame" width=500 height=500></canvas>
+
+    <script>
+        const canvas = document.getElementById("webgame"), 
+              context = canvas.getContext("2d"); 
+
+        /** 코드 3-3 **/
+        // context.fillRect(10, 10, 100, 100);
+
+
+        /** 코드 3-4 **/
+        // context.strokeRect(10, 10, 100, 100);
+
+
+        /** 코드 3-5 **/
+        // context.fillStyle = "red"; // 전경색 지정
+        // context.strokeStyle = "blue"; // 테두리 색상 지정
+        // context.lineWidth = 5; // 테두리 두께 지정
+        // context.fillRect(10, 10, 100, 100); // [코드3-3]
+        // context.strokeRect(10, 10, 100, 100); // [코드3-4]
+
+
+        /** 코드 3-6 **/
+        // context.beginPath(); // path를 시작함
+        // context.rect(10, 10, 100, 100); // (10, 10)좌표에 100
+        // context.fillStyle = "red";
+        // context.strokeStyle = "blue";
+        // context.lineWidth = 5;
+        // context.fill();
+        // context.stroke();
+
+
+        /** 코드 3-7 **/
+        // context.beginPath();
+        // context.moveTo(50, 50);
+        // context.lineTo(150, 50);
+        // context.lineTo(100, 100);
+        // context.lineTo(50, 50);
+        // context.closePath();
+        // context.fillStyle = "green";
+        // context.fill(); 
+
+
+        /** 코드 3-8 **/
+        // context.beginPath();
+        // context.arc(100, 100, 30, 0, Math.PI, true);
+        // context.closePath();
+        // context.stroke();
+
+
+        /** 코드 3-9 **/
+        // context.beginPath();
+        // context.moveTo(20, 100);
+        // context.lineTo(100, 100);
+        // context.arc(150, 100, 50, -Math.PI, 0, false);
+        // context.lineTo(250, 100);
+        // context.lineTo(250, 200);
+        // context.stroke();
+
+
+        /** 코드 3-10 **/
+        // context.fillText("Hello, world", 50, 50);
+        // context.strokeText("Hello, world", 50, 100);
+
+
+        /** 코드 3-11 **/
+        // context.font = "italic 600 20px/2 Helvetica";
+        // context.fillStyle = "green";
+        // context.fillText("Hello, world.", 50, 100);
+
+
+        /** 코드 3-12 **/
+        // context.font = "14px Helvetica";
+        // context.fillStyle = "black";
+
+        // context.textAlign = "start";
+        // context.fillText("context.textAlign = start", 200, 30);
+
+        // context.textAlign = "end";
+        // context.fillText("context.textAlign = end", 200, 60);
+
+        // context.textAlign = "left";
+        // context.fillText("context.textAlign = left", 200, 90);
+
+        // context.textAlign = "center";
+        // context.fillText("context.textAlign = center", 200, 120);
+
+        // context.textAlign = "right";
+        // context.fillText("context.textAlign = right", 200, 150);
+
+        // // 기준선
+        // context.strokeStyle = "red";
+        // context.lineWidth = "1px";
+        // context.beginPath();
+        // context.moveTo(200, 0);
+        // context.lineTo(200, 500);
+        // context.closePath();
+        // context.stroke();
+
+
+        /* 코드 3-13 **/
+        // context.font = "20px Helvetica";
+        // context.fillStyle = "black";
+
+        // context.textBaseline = "top";
+        // context.fillText("top", 10, 100);
+
+        // context.textBaseline = "hanging";
+        // context.fillText("hanging", 50, 100);
+
+        // context.textBaseline = "middle";
+        // context.fillText("middle", 130, 100);
+
+        // context.textBaseline = "alphabetic";
+        // context.fillText("alphabetic", 200, 100);
+
+        // context.textBaseline = "ideographic";
+        // context.fillText("ideographic", 300, 100);
+
+        // context.textBaseline = "bottom";
+        // context.fillText("bottom g", 420, 100); // g는 아래쪽으로 내려오는 텍스트 확인을 위해 추가
+
+        // // 기준선
+        // context.strokeStyle = "red";
+        // context.lineWidth = "1px";
+        // context.beginPath();
+        // context.moveTo(0, 100);
+        // context.lineTo(500, 100);
+        // context.closePath();
+        // context.stroke();
+
+
+        /** 코드 3-14 **/
+        // context.font = "50px/2 Helvetica";
+        // const metric = context.measureText("Hello, world");
+        // console.log(`width: ${metric.width}`);
+
+
+        /** 코드 3-15 **/
+        // const fillTextWithLineBreaks = (context, text, x, y, maxWidth) => {
+        //     const splittedText = text.split(" "),
+        //         // 이 예제에서는 텍스트 사이즈를 line height로 사용한다.
+        //         lineHeight = parseInt(context.font.match(/\d+/)[0], 10);
+
+        //     let textInLine = splittedText[0],
+        //         lineNum = 0;
+
+        //     for(let i = 1; i < splittedText.length; i++) {
+        //         let textMeasure = context.measureText(textInLine + splittedText[i]);
+
+        //         if (textMeasure.width >= maxWidth) {
+        //             context.fillText(textInLine, x, y + (lineNum * lineHeight));
+        //             textInLine = splittedText[i];
+        //             lineNum++;
+        //         } else {
+        //             textInLine += " " + splittedText[i];
+        //         }
+        //     }
+        //     context.fillText(textInLine, x, y + (lineNum * lineHeight));
+        // };
+
+        // const text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis diam nec augue pulvinar facilisis. Donec massa diam, auctor ac purus rutrum, placerat semper enim.",
+        //     maxWidth = 200;
+
+        // context.strokeRect(20, 20, 200, 200);
+        // context.font = "20px/2 Helvetica";
+        // // 텍스트가 위에서 그린 사각형 안쪽으로 들어오게 하기위해 textBaseline = “top”을 사용한다.
+        // context.textBaseline = "top";
+        // fillTextWithLineBreaks(context, text, 20, 20, maxWidth);
+
+
+        /** 코드 3-16 **/
+        // const img = new Image();
+        // img.onload = () => {
+        //     // 이미지 로딩이 완료된 후 캔버스에 그린다.
+        //     context.drawImage(img, 20, 20);
+        // }
+        // img.src = "coffee.jpg";
+
+
+        /** 코드 3-17 **/
+        // const img = new Image();
+        // img.onload = () => context.drawImage(img, 20, 20, 100, 100);
+        // img.src = "coffee.jpg";
+
+
+        /** 코드 3-18 **/
+        // const img = new Image();
+        // img.onload = () => context.drawImage(img, 150, 20, 160, 160, 20, 20, 100, 100); 
+        // img.src = "coffee.jpg";
+
+
+        /** 코드 3-19 **/
+        // const getPixelColor = (x, y) => {
+        //     const imageData = context.getImageData(x, y, 1, 1);
+        //     console.log(`color at (${x}, ${y}): rgba(${imageData.data[0]}, ${imageData.data[1]}, ${imageData.data[2]}, ${(imageData.data[3]/255)})`);
+        // };
+
+        // const img = new Image();
+        // img.onload = () => {
+        //     context.drawImage(img, 20, 20);
+
+        //     getPixelColor(50, 50); // 결과: color at (50, 50): rgba(70, 25, 6, 1)
+        //     getPixelColor(120, 120); // 결과: color at (120, 120): rgba(212, 184, 164, 1)
+        // }
+
+        // img.src = "coffee.jpg";
+
+
+        /** 코드 3-20 **/
+        const grayscale = (x, y, width, height) => {
+            // 1. 원본 이미지의 픽셀 데이터를 읽어온다.
+            const imageData = context.getImageData(x, y, width, height);
+            // 2. 흑백화 시킨 데이터를 저장할 새 ImageData 객체를 생성한다.
+            const grayscaledImageData = new ImageData(width, height);
+
+            // 3. 원본 이미지 데이터의 data 배열을 돌며 각 픽셀의 RGB값의 평균을 구해
+            // grayscaledImageData 객체의 해당 픽셀의 RGB값을 모두 이 평균 값으로 세팅한다.
+            // 알파값은 원본 이미지 데이터와 일치시킨다.
+            for(let i = 0, len = imageData.data.length; i < len; i+=4) {
+                const averageRGB = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3;
+                grayscaledImageData.data[i] = averageRGB;
+                grayscaledImageData.data[i + 1] = averageRGB;
+                grayscaledImageData.data[i + 2] = averageRGB;
+                grayscaledImageData.data[i + 3] = imageData.data[i + 3];
+            }
+
+            // 4. 흑백화 시킨 결과 이미지 데이터(grayscaledImageData)를 다시 캔버스에 집어넣는다.
+            context.putImageData(grayscaledImageData, x, y);
+        };
+
+        // const img = new Image();
+        // img.onload = () => {
+        //     context.drawImage(img, 20, 20);
+        //     grayscale(50, 50, 200, 200);
+        // }
+
+        // img.src = "coffee.jpg";
+
+
+        /** 코드 3-21 **/
+        const img = new Image();
+        img.onload = () => {
+            context.drawImage(img, 20, 20); 
+            // 3-19 코드의 grayscale활용
+            grayscale(50, 50, 200, 200);
+
+            const dataURL = canvas.toDataURL("image/png");
+
+            // 1.변환된 data URL에서 data:image/png;base64, 부분을 제외한,
+            // 순수 데이터 부분만을 추출한다.
+            const b64data = dataURL.replace(/^.+,/, '');
+
+            // 2. base64인코딩된 스트링을 decode한다.
+            const byteCharacters = atob(b64data);
+
+            // 3. 디코딩 완료된 byte array를 Uint8Array로 변환시키고, 
+            // 이 데이터를 토대로 Blob생성 및 Blob URL을 추출한다.
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers),
+                blob = new Blob([byteArray], {type: "image/png"}),
+                blobUrl = URL.createObjectURL(blob);
+
+            // 4. a태그를 생성해 링크로 blobURL을 연결시킨다.
+            const atag = document.createElement('a');
+            atag.href = blobUrl;
+            atag.setAttribute('download', 'a.png');
+            document.body.appendChild(atag);
+            atag.innerText = "download";
+        };
+
+        img.src = "coffee.jpg";
+
+    </script>
+</body>
+</html>

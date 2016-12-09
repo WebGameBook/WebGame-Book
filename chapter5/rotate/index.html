@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html body {margin:0;padding:0;}
+        div {overflow: auto; height: 300px; margin-top:10px;}
+        img {display: block; float: left; border: 1px solid #000;}
+        .center .rotated {
+            transform-origin: center center;
+            -webkit-transform-origin: center center;
+            -moz-transform-origin: center center;
+            -ms-transform-origin: center center;
+            -o-transform-origin: center center;
+        }
+        .zero .rotated {
+            transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            -ms-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+        }
+        .rotated {
+            margin-left: 100px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <img src="../img/jerry.png" alt="jerry" width="150px" height="150px" class="original">
+        <img src="../img/jerry.png" alt="jerry" width="150px" height="150px" class="rotated">
+    </div>
+    <div class="zero">
+        <img src="../img/jerry.png" alt="jerry" width="150px" height="150px" class="original">
+        <img src="../img/jerry.png" alt="jerry" width="150px" height="150px" class="rotated">
+    </div>
+</body>
+</html>

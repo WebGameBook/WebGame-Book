@@ -39,17 +39,28 @@ export default class Tile {
         this.el.data('position', position).css(this.cssTransform(this.x,this.y));
     }
 
+    move(x, y) {
+        //translate update
+        this.el.css(this.cssTransform(x, y));
+    }
+
+    getLocationData() {
+        return {
+            x: this.x,
+            y: this.y
+        }
+    }
+
     getAvaiableDirection() {
         const row = ~~(this.position / 4);
         const col = this.position % 4;
         const slot = this.board.openSlot;
+        
+        const UP = 0;
+        const RIGHT = 1;
+        const DOWN = 2;
+        const LEFT = 3;
 
-        /*
-            0 : up
-            1 : right
-            2 : down
-            3 : left
-        */
         if (row === slot.row) {
             return col < slot.col ? 1 : 3;
         } else if (col === slot.col) {

@@ -1,6 +1,13 @@
 import $ from 'jquery';
 import Tile from './tile';
 
+const DIRECTION = {
+    UP: 0,
+    RIGHT: 1,
+    DOWN: 2,
+    LEFT: 3
+};
+
 export default class Board {
     constructor($board, options) {
         this.board = $board;
@@ -20,6 +27,14 @@ export default class Board {
 
         this.tiles.push(null);
         this.setOpenSlot(15);
+    }
+
+    setOpenSlot(i) {
+        this.openSlot = {
+            position: i,
+            row: ~~(i / 4),
+            col: i % 4
+        };
     }
 
     suffleTiles() {
@@ -86,58 +101,48 @@ export default class Board {
         },this.options.animationTime);
     }
 
-    setOpenSlot(i) {
-        this.openSlot = {
-            position: i,
-            row: ~~(i / 4),
-            col: i % 4
-        };
-    }
-
     initTouchEvent() {
         const touchedItem = {};
         this.board.delegate('.tile', 'click', (e) => {
             const position = $(e.target).parent().data('position');
-
+            let currentElement = null;
             touchedItem.tile = this.tiles[position];
             touchedItem.direction = touchedItem.tile.getAvaiableDirection();
             touchedItem.position = position;
+            currentElement = this.tiles[touchedItem.tile.position];
 
             if (touchedItem.direction !== -1) {
-                /*
-                    0 : up
-                    1 : right
-                    2 : down
-                    3 : left
-                */
                 switch (touchedItem.direction) {
-                    case 0:
+                    case DIRECTION.UP:
                         touchedItem.tile.y -= this.options.tileSize;
                         touchedItem.tile.position -= 4;
                         this.tiles[touchedItem.tile.position] = touchedItem.tile;
                         this.tiles[position] = null;
+                        this.tiles[touchedItem.tile.position].move(currentElement.x, currentElement.y);
                         break;
-                    case 3:
+                    case DIRECTION.LEFT:
                         touchedItem.tile.x -= this.options.tileSize;
                         touchedItem.tile.position -= 1;
                         this.tiles[touchedItem.tile.position] = touchedItem.tile;
                         this.tiles[position] = null;
+                        this.tiles[touchedItem.tile.position].move(currentElement.x, currentElement.y);
                         break;
-                    case 1:
+                    case DIRECTION.RIGHT:
                         touchedItem.tile.x += this.options.tileSize;
                         touchedItem.tile.position += 1;
                         this.tiles[touchedItem.tile.position] = touchedItem.tile;
                         this.tiles[position] = null;
+                        this.tiles[touchedItem.tile.position].move(currentElement.x, currentElement.y);
                         break;
-                    case 2:
+                    case DIRECTION.DOWN:
                         touchedItem.tile.y += this.options.tileSize;
                         touchedItem.tile.position += 4;
                         this.tiles[touchedItem.tile.position] = touchedItem.tile;
                         this.tiles[position] = null;
+                        this.tiles[touchedItem.tile.position].move(currentElement.x, currentElement.y);
                         break;
                 }
-                this.clear();
-                this.render();
+
                 this.update();
             }
         });

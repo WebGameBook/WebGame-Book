@@ -16,8 +16,8 @@ export default class Board {
         this.options = options;
         this.initTiles();
         this.suffleTiles();
-        this.render();
         this.update();
+        this.render();
     }
 
     initTiles() {
@@ -32,7 +32,7 @@ export default class Board {
     setOpenSlot(i) {
         this.openSlot = {
             position: i,
-            row: ~~(i / 4),
+            row: Math.floor(i / 4),
             col: i % 4
         };
     }
@@ -40,7 +40,7 @@ export default class Board {
     suffleTiles() {
         let i, j, temp;
         for (i = this.tiles.length - 1; i > 0; i--) {
-            j = ~~(Math.random() * (i + 1));
+            j = Math.floor(Math.random() * (i + 1));
             temp = this.tiles[i];
             this.tiles[i] = this.tiles[j];
             this.tiles[j] = temp;
@@ -84,9 +84,8 @@ export default class Board {
 
     gameComplete() {
         let isComplete = true;
-
         for (let i = 0; i < this.tiles.length; i++) {
-            if (this.tiles[i] && (this.tiles[i].id !== i)) {
+            if (this.tiles[i] && ($(this.tiles[i].el[0]).attr('data-position') !== i)) {
                 isComplete = false;
             }
         }
@@ -103,7 +102,7 @@ export default class Board {
 
     initTouchEvent() {
         const touchedItem = {};
-        this.board.delegate('.tile', 'click', (e) => {
+        $('.tile').on('click', (e) => {
             const position = $(e.target).parent().data('position');
             let currentElement = null;
             touchedItem.tile = this.tiles[position];

@@ -1,14 +1,14 @@
 import $ from 'jquery';
 
 export default class Tile {
-    constructor(id, board, options) {
-        this.id = id;
+    constructor(position, board, options) {
+        this.position = position;
         this.options = options;
         this.el = '<div></div>';
         this.board = board;
         this.templates = {
             tile: (no) => {
-                const top = ~~(no/4) * -this.options.tileSize;
+                const top = Math.floor(no/4) * -this.options.tileSize;
                 const left = no%4 * -this.options.tileSize;
 
                 return (
@@ -22,13 +22,13 @@ export default class Tile {
     }
 
     render() {
-        this.el = $(this.templates.tile(this.id));
+        this.el = $(this.templates.tile(this.position));
     }
 
     update(position) {
         this.position = position;
         this.x = (position % 4) * this.options.tileSize;
-        this.y = ~~(position / 4) * this.options.tileSize;
+        this.y = Math.floor(position / 4) * this.options.tileSize;
         this.el.data('position', position).css(this.cssTransform(this.x, this.y));
     }
 
@@ -52,7 +52,7 @@ export default class Tile {
     }
 
     getAvaiableDirection() {
-        const row = ~~(this.position / 4);
+        const row = Math.floor(this.position / 4);
         const col = this.position % 4;
         const slot = this.board.openSlot;
         

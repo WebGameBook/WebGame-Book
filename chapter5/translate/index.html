@@ -12,10 +12,49 @@
             -ms-transform: translate(100%, 100%);
             -o-transform: translate(100%, 100%);
         }
+        .translated-x {
+            transform: translate(100%, 0%);
+            -webkit-transform: translate(100%, 0%);
+            -moz-transform: translate(100%, 0%);
+            -ms-transform: translate(100%, 0%);
+            -o-transform: translate(100%, 0%);
+        }
+        .translated-y {
+            transform: translate(0%, 100%);
+            -webkit-transform: translate(0%, 100%);
+            -moz-transform: translate(0%, 100%);
+            -ms-transform: translate(0%, 100%);
+            -o-transform: translate(0%, 100%);
+        }
+        .square {
+            width: 150px;
+            height: 150px;
+            padding:0;
+            display:inline-block;
+            border: 1px solid #000;
+            background-color:#e67e22;
+            position:absolute;
+            x:0;
+            y:0;
+            font-size: 14px;
+            text-align:center;
+        }
+        .dotted {
+            border: 3px dotted #000 !important;
+            background-color: #fff !important;
+        }
     </style>
 </head>
 <body>
-    <img src="../img/minions.png" alt="minions" width="150px" height="150px" class="original">
-    <img src="../img/minions.png" alt="minions" width="150px" height="150px" class="translated">
+    <div class="square original"></div>
+    <div class="square translated-x dotted">
+        translate(100%, 0%)
+    </div>
+    <div class="square translated-y dotted">
+        translate(0%, 100%)
+    </div>
+    <div class="square translated">
+        translate(100%, 100%)
+    </div>
 </body>
 </html>

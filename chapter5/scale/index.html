@@ -18,6 +18,7 @@
             -moz-transform: scale(1.5, 1.5);
             -ms-transform: scale(1.5, 1.5);
             -o-transform: scale(1.5, 1.5);
+            margin: 40px 50px 0 50px;
         }
         .small {
             transform: scale(0.5, 0.5);
@@ -26,11 +27,21 @@
             -ms-transform: scale(0.5, 0.5);
             -o-transform: scale(0.5, 0.5);
         }
+        .square {
+            width: 150px;
+            height: 150px;
+            padding:0;
+            display:inline-block;
+            border: 1px solid #000;
+            background-color:#e67e22;
+        }
     </style>
 </head>
 <body>
-    <img src="../img/minions.png" alt="minions" width="150px" height="150px" class="original">
-    <img src="../img/minions.png" alt="minions" width="150px" height="150px" class="big">
-    <img src="../img/minions.png" alt="minions" width="150px" height="150px" class="small">
+    <div class="square original"></div>
+    <div class="square big">
+    </div>
+    <div class="square small">
+    </div>
 </body>
 </html>

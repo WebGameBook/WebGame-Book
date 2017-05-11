@@ -11,5 +11,6 @@
 * js/image_loader.js: 이미지 로더 클래스
 * js/tetris.js: 테트리스 게임 클래스
 
-#Demo
+# Demo
+
 [DEMO](http://webgamebook.github.io/WebGame-Book/chapter4/)
